@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <Sdk Name="Aspire.AppHost.Sdk" Version="9.3.0"/>
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <UserSecretsId>8bb3ff73-ef45-405d-aa81-54f1e2f80624</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\AspireBlazorBlog.ApiService\AspireBlazorBlog.ApiService.csproj"/>
+        <ProjectReference Include="..\AspireBlazorBlog.Web\AspireBlazorBlog.Web.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Aspire.Hosting.AppHost" Version="9.3.0"/>
+        <PackageReference Include="Aspire.Hosting.Redis" Version="9.3.0"/>
+    </ItemGroup>
+
+</Project>
