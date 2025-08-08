@@ -28,6 +28,12 @@ dotnet test
 
 # Run specific test project
 dotnet test AspireBlazorBlog.Tests
+
+# Run a single test
+dotnet test --filter "FullyQualifiedName~WebTests.GetWebResourceRootReturnsOkStatusCode"
+
+# Run tests with detailed output
+dotnet test --logger:"console;verbosity=detailed"
 ```
 
 ## Architecture
@@ -82,3 +88,12 @@ The application currently implements:
 - No blog functionality implemented yet - this is still the base template
 - All HTTP clients should use service discovery names, not hardcoded URLs
 - When adding new services, register them in the AppHost and add appropriate references
+
+## Testing Strategy
+
+- Integration tests use `DistributedApplicationTestingBuilder` to test the entire distributed application
+- Tests include proper timeout handling (30 seconds default)
+- Tests wait for resources to be healthy before making requests:
+  ```csharp
+  await app.ResourceNotifications.WaitForResourceHealthyAsync("webfrontend", cancellationToken)
+  ```
