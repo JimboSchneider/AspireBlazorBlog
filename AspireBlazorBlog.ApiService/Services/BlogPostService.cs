@@ -74,6 +74,9 @@ public class BlogPostService : IBlogPostService
             return null;
         }
 
+        // Check if the title is actually changing before we overwrite it
+        var titleChanged = existingPost.Title != blogPost.Title;
+
         // Update only allowed fields
         existingPost.Title = blogPost.Title;
         existingPost.Content = blogPost.Content;
@@ -81,10 +84,10 @@ public class BlogPostService : IBlogPostService
         existingPost.UpdatedAt = DateTime.UtcNow;
 
         // Regenerate slug if title changed
-        if (existingPost.Title != blogPost.Title)
+        if (titleChanged)
         {
             existingPost.Slug = GenerateSlug(blogPost.Title);
-            
+
             // Ensure uniqueness
             var slugBase = existingPost.Slug;
             var counter = 1;
